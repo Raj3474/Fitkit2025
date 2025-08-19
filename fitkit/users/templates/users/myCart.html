@@ -1,0 +1,77 @@
+{% extends "users/layout.html" %}
+
+{% block title %}
+    Product Details | Fitkit
+{% endblock %}
+
+
+{% block css %}
+	<link rel="stylesheet" href="{{ url_for('users.static', filename='css/myCart.css') }}">
+{% endblock %}
+
+
+{% block main %}
+		<!--------------- cart items details ------------->
+
+		<div class="cart-container">
+
+			<div class="link">
+				<i class="fa fa-caret-right"></i>
+				<a href="{{ url_for('users.myOrders') }}">My Orders &#8594;</a>
+			</div>
+
+			{% if cart_items|length > 0 %}
+			<h1 class="my-cart-title">My Cart</h1>
+			<table>
+				<tr>
+					<th>Product</th>
+					<th>Quantity</th>
+					<th>Size</th>
+					<th>Subtotal</th>
+				</tr>
+				{% for item in cart_items %}
+				<tr class="cart-item" id="{{ item.id }}">
+					<td>
+						<div class="cart-info">
+							<a href="{{ url_for('product.detail', product_id=item.product.id) }}">
+							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ item.product.id }}.jpg">
+							<p>{{ item.product.name }}</p>
+							</a>
+							<div class="cart-medium">
+								<medium>Price: &#8377; {{ item.product.price }}</medium>
+								<br>
+								<a href="{{ url_for('users.removeFromCart', cart_id=item.id) }}">Remove</a>
+							</div>
+						</div>
+					</td>
+					<td>{{ item.quantity }}</td>
+					<td>
+						{{ item.size }}
+					</td>
+					<td>&#8377; {{ item.product.price * item.quantity }}</td>
+				</tr>
+				{% endfor %}
+
+			</table>
+
+			<div class="total-price">
+
+				<table>
+					<tr>
+						<td>Grand Total</td>
+						<td>&#8377; {{ grandTotal }}</td>
+					</tr>
+				</table>
+			</div>
+			{% if grandTotal != 0 %}
+			<div class="order-btn-div">
+				<a href="{{ url_for('users.placeOrder') }}"><button class="order-btn">Place Order Now &#8594;</button></a>
+			</div>
+			{% endif %}
+
+		{% else %}
+			<div class="no-product"><h1>Empty Cart</h1></div>
+		{% endif %}
+		</div>
+
+{% endblock %}

@@ -1,0 +1,128 @@
+/*---------- orders -----------------*/
+.small-container{
+	max-width: 1200px;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 25px;
+    overflow-x: auto;
+}
+
+.dispatched-orders{
+    margin-bottom: 30px;
+}
+.order-page{
+	margin: 80px auto;
+}
+
+.my-order-title{
+	position: relative;
+	text-align: left;
+	color: #555;
+	margin-left: 12px;
+	margin-bottom: 20px;
+}
+
+.my-order-title:after{
+	content: "";
+	display: block;
+	margin: 0 auto;
+	width: 215px;
+	position: absolute;
+	bottom: 1px;
+	border-bottom: 4px solid #ff523b;
+
+	z-index: -1;
+}
+
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+
+th{
+	text-align: center;
+	padding: 10px;
+	color: #fff;
+	background: #ff523b;
+	font-weight: normal;
+}
+
+#address{
+	max-width: 150px;
+	}
+
+.address{
+	text-align: left;
+	max-width: 150px;
+}
+
+td a{
+	width: 55px;
+	height: 16px;
+	color: #555;
+	font-size: 12px;
+	border-radius: 4px;
+	background-color: orange;
+}
+
+tr{
+	padding-top: 10px;
+}
+
+td{
+	text-align:center;
+	padding: 5px 20px 0;
+	border-bottom: solid 1px gray;
+}
+
+
+tr img{
+	width: 60px;
+	margin-right: 10px;
+}
+
+
+
+
+.order-info{
+	display: block;
+	flex-wrap: wrap;
+}
+
+.order-info div{
+	margin: 5px;
+	}
+
+
+.address, .last-row-of-an-order, .button{
+	margin-bottom: 100px;
+	border-bottom: solid 2px red;
+}
+
+
+#admin-buttons-container{
+    display: flex;
+    justify-content: left;
+    margin-top: 5px;
+}
+
+#admin-buttons-container > div{
+    margin: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+
+}
+
+.admin-button{
+    margin: 0 10px;
+}
+
+@media only screen and (max-width: 500px)
+{
+    table{
+        width: 80vw;
+        overflow-x: auto;
+    }
+}

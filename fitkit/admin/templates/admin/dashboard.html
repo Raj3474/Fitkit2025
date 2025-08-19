@@ -1,0 +1,25 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}
+	Admin Dashboard | Fitkit
+{% endblock %}
+
+{% block css %}
+	<!--stylesheets-->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block main %}
+    <div class="dashboard-container">
+        <h1>Admin Dashboard</h1>
+        <div class="dashboard-content">
+            <a href="{{ url_for('admin.dashboard') }}" class="tab active">Dashboard</a>
+            <a href="{{ url_for('admin.addProduct') }}" class="tab">Add Product</a>
+            <a href="{{ url_for('admin.orders') }}" class="tab">Orders</a>
+            <a href="{{ url_for('admin.allProducts') }}" class="tab">All Product</a>
+        </div>
+
+    </div>
+
+		<!----------- js for toggle menu ------------------>
+{% endblock %}

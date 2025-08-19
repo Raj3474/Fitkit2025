@@ -1,0 +1,47 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}
+	All Registered Products | Fitkit
+{% endblock %}
+
+{% block css %}
+	<!--stylesheets-->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/products.css') }}">
+{% endblock %}
+
+{% block main %}
+		<!--------------- all products ------------->
+
+	<div class="product-container">
+
+		<h1>All products</h1>
+
+
+		<div class="grid-container">
+
+			{% for product in products %}
+
+			<div class="grid-item" id="{{ product.id }}">
+				<div class="row">
+					<div class="grid-col-1">
+						<img src="{{ url_for('product.static', filename='images/' + product.image + '_thumbnail.jpg') }}" alt="{{ product.name }}">
+					</div>
+					<div class="grid-col-2">
+						&#8377; {{ product.price }}
+						<br>
+						{{ product.sizes }}
+					</div>
+				</div>
+				<p>{{ product.productName }}</p>
+				{% if product.is_active %}
+					<button><a href="{{ url_for('admin.removeProduct', p=product.id )}}">Remove</a></button>
+					<button><a href="{{ url_for('admin.editProduct', p=product.id )}}">Edit</a></button>
+				{% else %}
+					<button id="product-inactive-btn"><a href="{{ url_for('admin.restockProduct', p=product.id )}}">Restock Product</a></button>
+				{% endif %}
+			</div>
+			{% endfor %}
+	</div>
+	</div>
+		<!----------- js for product removal ------------------>
+{% endblock %}

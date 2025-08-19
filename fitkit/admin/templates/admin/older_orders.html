@@ -1,0 +1,69 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}
+	Admin Completed Orders | Fitkit
+{% endblock %}
+
+{% block css %}
+	<!--stylesheets-->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/orders.css') }}">
+{% endblock %}
+
+{% block main %}
+
+		
+		<!--------------- Orders ------------->
+		
+		<div class="small-container order-page">
+			<h1 class="my-order-title">Completed Orders</h1>
+			{% if archived_orders %}
+			<table>
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>size</th>
+						<th>Quantity</th>
+						<th id="address">Address</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in archived_orders %}
+						<tr class="last-row-of-an-order">
+							<td>
+								<div class="cart-info">
+									<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+									<div>
+										<p>{{ order.product.name }}</p>
+									</div>
+								</div>
+							</td>
+							<td>{{ order.order_size}}</td>
+							<td>{{ order.order_quantity }}</td>
+
+							<td class="address">
+								Deliver To: {{ order.address}}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+				<p>No completed orders found.</p>
+			{% endif %}
+		</div>
+		
+
+        <div class="small-container"></div>
+            
+        </div>
+
+		<div class="small-container">
+            <div id="admin-buttons-container">
+                <div class="admin-button"><a href="{{ url_for('admin.dashboard' )}}" class="tab">Back to Dashboard</a></div>
+                <div class="admin-button"><a href="{{ url_for('admin.orders' )}}" class="tab">All Orders</a></div>
+            </div>
+        </div>
+
+		<!----------- js for toggle menu ------------------>
+{% endblock %}

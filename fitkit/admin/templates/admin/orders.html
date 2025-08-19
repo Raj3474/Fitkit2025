@@ -1,0 +1,106 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}
+	Admin Dashboard | Fitkit
+{% endblock %}
+
+{% block css %}
+	<!--stylesheets-->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/orders.css') }}">
+{% endblock %}
+
+{% block main %}
+
+		
+		<!--------------- Orders ------------->
+
+		<div class="small-container order-page">
+			<h1 class="my-order-title">Latest Orders</h1>
+            {% if latest_orders %}
+			<table>
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>size</th>
+						<th>Quantity</th>
+						<th id="address">Address</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in latest_orders %}
+						<tr class="last-row-of-an-order">
+							<td>
+								<div class="cart-info">
+									<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+									<div>
+										<p>{{ order.product.name }}</p>
+									</div>
+								</div>
+							</td>
+							<td>{{ order.order_size }}</td>
+							<td>{{ order.order_quantity }}</td>
+
+							<td class="address">
+								Deliver To: {{ order.address}}
+							</td>
+							<td class="button"><a href="{{ url_for('admin.dispatchOrder', p=order.id )}}">Dispatch</a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+            {% else %}
+                <p>No latest orders found.</p>
+            {% endif %}
+		</div>
+
+
+		<div class="small-container dispatched-orders">
+			<h1 class="my-order-title">Dispatched Orders</h1>
+            {% if in_transit_orders %}
+			<table>
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>size</th>
+						<th>Quantity</th>
+						<th id="address">Address</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in in_transit_orders %}
+						<tr  class="last-row-of-an-order">
+							<td>
+								<div class="cart-info">
+									<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+									<div>
+										<p>{{ order.product.name }}</p>
+									</div>
+								</div>
+							</td>
+							<td>{{ order.order_size }}</td>
+							<td>{{ order.order_quantity }}</td>
+
+							<td class="address">
+								Deliver To: {{ order.address}}
+							</td>
+							<td class="button"><a href="{{ url_for('admin.completeOrder', p=order.id )}}">Mark as Complete</a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+            {% else %}
+                <p>No dispatched orders found.</p>
+            {% endif %}
+		</div>
+
+        <div class="small-container">
+            <div id="admin-buttons-container">
+                <div class="admin-button"><a href="{{ url_for('admin.dashboard' )}}" class="tab">Back to Dashboard</a></div>
+                <div class="admin-button"><a href="{{ url_for('admin.completedOrders' )}}" class="tab">Older Orders</a></div>
+            </div>
+        </div>
+
+		<!----------- js for toggle menu ------------------>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All products Page | Fitkit
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="/product/static/css/products.css">
+{% endblock %}
+
+
+{% block main %}
+
+		<!------------ All Products -------->
+		<div class="small-container">
+			
+			{% if items.items|length > 0 %}
+			<div class="row row-2">
+				<h2>All Products</h2>
+				<form id="target" action="/" method="get">
+				<select id="sort" name="sort_by">
+					<option value="low_to_high" {% if sort == 'low_to_high' %} selected {% endif %}>Sort by price: Low to High</option>
+					<option value="high_to_low" {% if sort == 'high_to_low' %} selected {% endif %}>Sort by Price High to Low</option>
+					<option value="newer" {% if sort == 'newer' %} selected {% endif %}>Sort by Newer First</option>
+					<option value="older" {% if sort == 'older' %} selected {% endif %}>Sort by older First</option>
+				</select>
+				</form>
+			</div>
+			<div class="container">
+				<div class="row">
+					{% for product in items %}
+						<div class="col-4">
+							<a href="/product/detail?p={{ product.product_id }}">
+							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id }}a.jpg">
+							<h4>{{ product.name }}</h4>
+							<p>&#8377; {{ product.price }}</p>
+							</a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			
+
+			<div class="page-btn">
+
+				{% for page_num in items.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+					{% if page_num %}
+						{% if items.page == page_num %}
+							<a class="btn btn-info mb-4" href="{{ url_for('product.index', page_num=page_num, sort_by=sort) }}">{{ page_num }}</a>
+						{% else %}
+							<a class="btn btn-outline-info mb-4" href="{{ url_for('product.index', page_num=page_num, sort_by=sort) }}">{{ page_num }}</a>
+						{% endif %}
+					{% else %}
+						...
+					{% endif %}
+				{% endfor %}
+			</div>
+		
+			{% else %}
+				<div class="no-product"><h1>No product, Comeback later.</h1></div>
+			{% endif %}
+			</div>
+
+		<script>
+        $(document).ready(function(){
+            $("#sort").change( function(){
+                $("#target").submit();
+            });
+        });
+    </script>
+{% endblock %}

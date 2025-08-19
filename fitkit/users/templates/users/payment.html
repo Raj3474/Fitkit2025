@@ -1,0 +1,55 @@
+{% extends "users/layout.html" %}
+
+{% block title %}
+    Payment | Fitkit
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="{{ url_for('users.static', filename='css/payment.css') }}">
+{% endblock %}
+
+
+{% block main %}
+		<!--------------- form ------------>
+	<div class="payment-container">
+				<div class="form-container">
+					<p>Payment</p>
+					<form action="{{ url_for('users.closeOrder')}}">
+						<address id="address" name="address" rows="12" cols="50" maxlength="500" disabled>{{ address }}</address>
+						<button class="btn" id="rzp-button1">Pay &#8377; {{ order.amount / 100 }} &#8594;</button>
+					</form>
+						
+				        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+				        <script>
+				            document.getElementById('rzp-button1').onclick = function(e){
+								const options = {
+				                    "key": "{{ key_id }}", // Enter the Key ID generated from the Dashboard
+				                    "amount": "{{ order.amount }}",
+				                    "currency": "INR",
+				                    "name": "Fitkit",
+				                    "description": "Test Transaction",
+				                    "image": "https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/fitkitsquare.jpg",
+				                    "order_id": "{{ order.id }}",
+				                    "callback_url": "{{ url_for('users.verifyPayment') }}"
+				                };
+				                var rzp1 = new Razorpay(options);
+								rzp1.open();
+								console.log(111)
+								console.log(rzp1)
+				                rzp1.on('payment.failed', function (response){
+				                        alert(response.error.code);
+				                        alert(response.error.description);
+				                        alert(response.error.source);
+				                        alert(response.error.step);
+				                        alert(response.error.reason);
+				                        alert(response.error.metadata.order_id);
+				                        alert(response.error.metadata.payment_id);
+				                });
+				                	
+
+								e.preventDefault();
+				            }
+				        </script>
+				</div>
+	</div>
+{% endblock %}
