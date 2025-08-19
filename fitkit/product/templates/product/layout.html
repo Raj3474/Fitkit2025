@@ -46,7 +46,7 @@
 							<li><a href="/product">Products</a></li>
 							<li><a href="/about">About</a></li>
 							<li><a href="/contact">Contact</a></li>
-							{% if not session.user_id %}
+							{% if not current_user.is_authenticated %}
 								<li><a href="/users/login">Login</a></li>
 							{% else %}
 								<li><a href="/users/logout">Logout</a></li>

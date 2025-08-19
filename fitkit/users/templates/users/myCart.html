@@ -34,7 +34,7 @@
 					<td>
 						<div class="cart-info">
 							<a href="{{ url_for('product.detail', product_id=item.product.id) }}">
-							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ item.product.id }}.jpg">
+							<img src="{{ url_for('product.static', filename='images/' + item.product.image + '_thumbnail.jpeg') }}">
 							<p>{{ item.product.name }}</p>
 							</a>
 							<div class="cart-medium">

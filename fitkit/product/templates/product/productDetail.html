@@ -14,21 +14,14 @@
 		<div class="small-container single-product">
 			<div class="row">
 				<div class="col-2">
-					<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}a.jpg" width="250px" height="320px" id="ProductImg">
+					<img src="{{ url_for('product.static', filename='images/' + product.image + '_0.jpeg') }}" width="250px" height="320px" id="ProductImg">
 
 					<div class="small-img-row">
-						<div class="small-img-col">
-							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}a.jpg" width="100%" class="small-img">
+						{% for i in range(product.num_images) %}
+							<div class="small-img-col">
+							<img src="{{ url_for('product.static', filename='images/' + product.image + '_' + i|string +'.jpeg') }}" width="100%" class="small-img">
 						</div>
-						<div class="small-img-col">
-							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}b.jpg" width="100%" class="small-img">
-						</div>
-						<div class="small-img-col">
-							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}c.jpg" width="100%" class="small-img">
-						</div>
-						<div class="small-img-col">
-							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}d.jpg" width="100%" class="small-img">
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 				<div class="col-2">

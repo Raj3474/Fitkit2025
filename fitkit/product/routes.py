@@ -34,7 +34,7 @@ def index(page=1):
 
     print(dir(items))
     print(items.items)
-    print(items.items[0].id)
+    # print(items.items[0].id)
 
     # return '<h1>Hello, world</h1>'
     return render_template("product/index.html", items=items, sort=sort_by)

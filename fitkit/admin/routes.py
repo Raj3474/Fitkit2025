@@ -22,22 +22,18 @@ admin = Blueprint('admin', __name__,
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
+        print(request.url)
         if not current_user.is_authenticated or current_user.role != 'admin':
-            raise HTTPException
-            abort(403)  # Forbidden
+            return redirect(url_for('users.login', next=request.url))
         return f(*args, **kwargs)
     return decorated_function
-
-
-# @admin.route('admin_register')
-# def adminRegisterr():
 
 
 
 """ admin dashboard """
 @admin.route("/dashboard", methods=["GET", "POST"])
 @admin.route("/", methods=["GET", "POST"])
-# @admin_required     # to confirm that admin is logged-in and not a user
+@admin_required     # to confirm that admin is logged-in and not a user
 def dashboard():
     # print(secrets.token_hex(8))
     return render_template("admin/dashboard.html")
@@ -52,7 +48,7 @@ def orders():
 
 
 @admin.route("/dispatch_order")
-# @admin_required  
+@admin_required  
 def dispatchOrder():
     p = request.args.get('p')
     order = Order.query.filter_by(id=p).first()
@@ -69,7 +65,7 @@ def dispatchOrder():
 
 
 @admin.route("/complete_order")
-# @admin_required       
+@admin_required       
 def completeOrder():
     p = request.args.get('p')
     order = Order.query.filter_by(id=p).first()
@@ -85,7 +81,7 @@ def completeOrder():
 
 
 @admin.route("/completed_orders")
-# @admin_required
+@admin_required
 def completedOrders():
     completedOrders = Order.query.filter_by(order_status='Completed').all()  # Assuming 'Completed' means archived orders
     return render_template("admin/older_orders.html", archived_orders=completedOrders)
@@ -116,14 +112,14 @@ def addProduct():
 
 
 @admin.route("/all_products")
-# @admin_required
+@admin_required
 def allProducts():
     products = Product.query.order_by(Product.is_active.desc()).all()  # Fetch all products from the database
     return render_template("admin/products.html", products=products)
 
 
 @admin.route("/restock_product")
-# @admin_required
+@admin_required
 def restockProduct():
     p = request.args.get('p')
     product = Product.query.filter_by(id=p).first()
@@ -139,7 +135,7 @@ def restockProduct():
     return redirect(url_for('admin.allProducts'))
 
 @admin.route("/remove_product")
-# @admin_required
+@admin_required
 def removeProduct():
     p = request.args.get('p')
     product = Product.query.filter_by(id=p).first()
@@ -156,7 +152,7 @@ def removeProduct():
 
 
 @admin.route("/edit_product")
-# @admin_required
+@admin_required
 def editProduct():
     p = request.args.get('p')
     product = Product.query.filter_by(id=p).first()
