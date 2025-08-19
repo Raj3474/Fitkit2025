@@ -50,9 +50,9 @@
 						<ul id="MenuItems">
 							<li><a href="/">Home</a></li>
 							{% if current_user.is_authenticated %}
-								<li><a href="{{ url_for('admin.product') }}">Products</a></li>
+								<li><a href="{{ url_for('admin.allProducts') }}">Products</a></li>
 								<li><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
-								<li><a href="{{ url_for('admin.layout') }}">Logout</a></li>
+								<li><a href="{{ url_for('admin.logout') }}">Logout</a></li>
 							{% else %}
 								<li><a href="{{ url_for('product.index')}}">Products</a></li>
 							{% endif %}
