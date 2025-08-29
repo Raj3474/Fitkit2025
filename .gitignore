@@ -1,2 +1,3 @@
-.evn
+.env
 /fitkit/product/static/images/
+/fitkit/*/__pycache__/
