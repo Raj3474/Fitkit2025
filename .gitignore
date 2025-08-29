@@ -1,3 +1,5 @@
 .env
 /fitkit/product/static/images/
-/fitkit/*/__pycache__/
+/fitkit/users/__pycache__/
+/fitkit/product/__pycache__/
+/fitkit/admin/__pycache__/
