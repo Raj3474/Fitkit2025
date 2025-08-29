@@ -12,10 +12,10 @@ class MultipleCheckBoxField(SelectMultipleField):
 
 
 
-class ProductForm(FlaskForm):
+class AddProductForm(FlaskForm):
     name = StringField('Product Name', validators=[DataRequired(), Length(min=2, max=100)])
     description = TextAreaField('Description', validators=[DataRequired(), Length(min=10, max=500)])
     price = IntegerField('Price', validators=[DataRequired()])
     sizes = MultipleCheckBoxField('Sizes', choices=[('s', 'Small'), ('m', 'Medium'), ('l', 'Large'), ('xl', 'Extra Large')], validators=[DataRequired()])
     image = MultipleFileField('Product Image', validators=[FileAllowed(['jpeg', 'jpg', 'png']), DataRequired()])
-    submit = SubmitField('Add Product')
+    submit = SubmitField('Submit')

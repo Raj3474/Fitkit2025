@@ -1,0 +1,102 @@
+{% extends "admin/admin_layout.html" %}
+
+{% block title %}
+	Edit product | Fitkit
+{% endblock %}
+
+{% block css %}
+	<!--stylesheets-->
+	<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/add_product.css') }}">
+{% endblock %}
+
+{% block main %}
+		<!--------------- all products ------------->
+
+	<div class="add-product-container">
+		<form method="POST" action="{{ url_for('admin.editProduct', product=product.id)}}" class="add_product" enctype="multipart/form-data" novalidate>
+            {{ form.hidden_tag() }}
+            <h2>Add Product</h2>
+
+            <div class="form-group">
+                {{ form.name.label(class="form-control-label") }}
+                <br>
+                {% if form.name.errors %}
+                    {{ form.name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.name(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.description.label(class="form-control-label") }}
+                <br>
+                {% if form.description.errors %}
+                    {{ form.description(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.description.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.description(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.price.label(class="form-control-label") }}
+                <br>
+                {% if form.price.errors %}
+                    {{ form.price(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.price.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.price(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ form.sizes.label(class="form-control-label") }}
+                <div class="checkbox-group">
+                    {% if form.sizes.errors %}
+                        {{ form.sizes(class="form-control form-control-lg is-invalid") }}
+                        <br>
+                        <div class="invalid-feedback">
+                            {% for error in form.sizes.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.sizes(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group" style="visibility: hidden;">
+                {{ form.image.label(class="form-control-label") }}
+                    {% if form.image.errors %}
+                        {{ form.image(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.image.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.image(class="form-control form-control-lg") }}
+                    {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+	</div>
+		<!----------- js for product removal ------------------>
+{% endblock %}
+

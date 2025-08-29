@@ -34,8 +34,8 @@
 				</div>
 				<p>{{ product.productName }}</p>
 				{% if product.is_active %}
-					<button><a href="{{ url_for('admin.removeProduct', p=product.id )}}">Remove</a></button>
-					<button><a href="{{ url_for('admin.editProduct', p=product.id )}}">Edit</a></button>
+					<button><a href="{{ url_for('admin.removeProduct', product=product.id )}}">Remove</a></button>
+					<button><a href="{{ url_for('admin.editProduct', product=product.id )}}">Edit</a></button>
 				{% else %}
 					<button id="product-inactive-btn"><a href="{{ url_for('admin.restockProduct', p=product.id )}}">Restock Product</a></button>
 				{% endif %}

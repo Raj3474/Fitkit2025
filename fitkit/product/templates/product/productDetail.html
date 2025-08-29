@@ -33,8 +33,7 @@
 						<form action="{{ url_for('users.addToCart') }}", method="post">
 							{% if product.is_active == False %}
 								<p style="color: red; font-weight: bold;">Out of Stock</p>
-							
-							{% elif product.stock == 0 %}
+							{% else %}
 							<input style="display:none" type="text" name="p" value="{{ product.id }}">
 							<select name="s">
 								<option disabled Selected>Select Size</option>

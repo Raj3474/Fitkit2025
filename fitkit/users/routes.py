@@ -71,13 +71,8 @@ def addToCart():
 
 """ My cart """
 @users.route("/myCart")
-# @login_required
+@login_required
 def myCart():
-
-    # remove this after login into the app.
-    current_user = 1
-    current_user = User.query.get_or_404(1)
-
 
     cart_items = Cart.query.filter_by(cart_user=current_user).all()
     print(111, cart_items)
@@ -101,10 +96,6 @@ def removeFromCart():
     if not cart_id:
        flash(u"Something went wrong!", "danger")
        return redirect("/myCart")
-    
-    # remove this after login into the app.
-    current_user = 1
-    current_user = User.query.get_or_404(1)
 
 
     cart_item = Cart.query.filter_by(id=cart_id, cart_user=current_user).all()
@@ -157,8 +148,6 @@ def checkout():
     mob = session['mob']
     
     print("Payment Successfull", "success")
-    current_user = 1
-    current_user = User.query.get_or_404(1)
 
     cart_items = Cart.query.filter_by(cart_user=current_user).all()
     print(111, cart_items)

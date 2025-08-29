@@ -9,7 +9,7 @@ from fitkit.users.routes import login
 
 from fitkit.users.models import Order
 from fitkit.product.models import Product
-from fitkit.admin.forms import ProductForm
+from fitkit.admin.forms import AddProductForm
 
 import secrets
 
@@ -90,7 +90,7 @@ def completedOrders():
 @admin.route("/add_product", methods=["GET", "POST"])
 # @admin_required
 def addProduct():
-    form = ProductForm()
+    form = AddProductForm()
 
     if form.validate_on_submit():
         if not form.image.data:
@@ -121,7 +121,7 @@ def allProducts():
 @admin.route("/restock_product")
 @admin_required
 def restockProduct():
-    p = request.args.get('p')
+    p = request.args.get('product')
     product = Product.query.filter_by(id=p).first()
     if product:
         if not product.is_active:
@@ -137,7 +137,7 @@ def restockProduct():
 @admin.route("/remove_product")
 @admin_required
 def removeProduct():
-    p = request.args.get('p')
+    p = request.args.get('product')
     product = Product.query.filter_by(id=p).first()
     if product:
         if product.is_active:
@@ -151,18 +151,41 @@ def removeProduct():
     return redirect(url_for('admin.allProducts'))
 
 
-@admin.route("/edit_product")
+@admin.route("/edit_product/<int:product>", methods=["GET", "POST"])
 @admin_required
-def editProduct():
-    p = request.args.get('p')
-    product = Product.query.filter_by(id=p).first()
-    if product:
-        product.is_active = False  # Mark the product as inactive
-        db.session.commit()
-        flash("Product removed successfully", "success")       
-    else:
-        flash("Product not found", "danger")    
-    return redirect(url_for('admin.allProducts'))
+def editProduct(product):
+    
+    product = Product.query.filter_by(id=product).first()
+    if not product:
+        flash("Product not found", "danger")
+        return redirect(url_for('admin.allProducts'))
+
+    form = AddProductForm()  # Prepopulate the form with product data
+    print(form.data)
+
+    if form.validate_on_submit():
+        
+        print(form.image.data)
+        print('Form submitted successfully')
+        print("Form data:", form.data)
+
+        product.name = form.name.data
+        product.description = form.description.data
+        product.price = form.price.data
+        product.sizes = ','.join(form.sizes.data)
+        db.session.commit()  # Assuming this function handles the image upload
+
+        flash('Product updated successfully', 'success')
+        return redirect(url_for('admin.allProducts'))
+    elif request.method == 'GET':
+        form.name.data = product.name
+        form.description.data = product.description
+        form.price.data = product.price
+        form.sizes.data = product.sizes.split(',')
+        print(form.data)
+        print(form.image.data)
+       
+    return render_template("admin/edit_product.html", form=form, product=product)
 
 
 
