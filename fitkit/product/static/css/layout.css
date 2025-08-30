@@ -168,16 +168,12 @@ p{
 	width: 100%;
 }
 
-.small-container{
-	max-width: 1080px;
-	margin: auto;
-	padding: 0 25px;
-}
+
 
 /*------- latest products-------- */
 
 .col-4{
-	flex-basis: 25%;
+	flex-basis: 22%;
 	padding: 10px;
 	min-width: 200px;
 	margin-bottom: 50px;
@@ -222,83 +218,9 @@ h4{
 }
 
 
-/*------- offer --------*/
-.offer{
-	background: radial-gradient(farthest-side at 85% 90%,#a6ff51, #ffeb03);
-	margin-top:80px;
-	padding: 30px 0;
-}
-
-.offer-col-2 img{
-	padding: 15px 0;
-}
-
-small {
-	color: #555;
-}
 
 
-/*--------------testimonial--------------*/
-.testimonial{
-	padding-top: 100px;
-}
 
-.testimonial .col-3{
-	align-items: center;
-	text-align: center;
-	padding: 40px 20px;
-	box-shadow: 0 0 20px 0px rgba(0,0,0,0.3);
-	cursor: pointer;
-	transition: transform 0.5s;
-}
-
-.testimonial .col-3 img{
-	width: 100px;
-	height: 100px;
-	margin-top: 20px;
-	border-radius: 50%;
-}
-
-.testimonial .col-3:hover{
-	transform: translateY(-10px);
-}
-
-.fa.fa-quote-left{
-	font-size: 34px;
-	color: #3bff41;;
-}
-
-.col-3 p{
-	font-size: 12px;
-	margin: 12px 0;
-	color: #777;
-}
-
-.testimonial .col-3 h3{
-	font-weight: 600;
-	color:#555;
-	font-size: 16px;
-}
-
-
-/*------------- brands -------------*/
-.brands{
-	margin: 100px auto;
-}
-
-.col-5{
-	width: 160px;
-}
-
-.col-5 img{
-	width: 100%;
-	cursor: pointer;
-	filter: grayscale(100%);
-}
-
-.col-5 img:hover{
-	filter: grayscale(0);
-}
 
 
 

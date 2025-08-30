@@ -82,7 +82,7 @@
 				{% for product in related_products %}
 				<div class="col-4">
 					<a href="{{ url_for('product.detail', product_id=product.id) }}">
-					<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id }}a.jpg">
+					<img src="{{ url_for('product.static', filename='images/' + product.image + '_thumbnail.jpeg') }}">
 					<h4>{{ product.product_name }}</h4>
 					<p>&#8377; {{ product.price }}</p>
 					</a>

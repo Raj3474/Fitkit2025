@@ -42,9 +42,9 @@
 				{% for page_num in items.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
 					{% if page_num %}
 						{% if items.page == page_num %}
-							<a class="btn btn-info mb-4" href="{{ url_for('product.index', page_num=page_num, sort_by=sort) }}">{{ page_num }}</a>
+							<a class="btn btn-info mb-4" href="{{ url_for('product.index', page=page_num, sort_by=sort) }}">{{ page_num }}</a>
 						{% else %}
-							<a class="btn btn-outline-info mb-4" href="{{ url_for('product.index', page_num=page_num, sort_by=sort) }}">{{ page_num }}</a>
+							<a class="btn btn-outline-info mb-4" href="{{ url_for('product.index', page=page_num, sort_by=sort) }}">{{ page_num }}</a>
 						{% endif %}
 					{% else %}
 						...
@@ -75,19 +75,19 @@
 					<div class="col-3">
 						<i class="fa fa-quote-left"></i>
 						<p>“You have to fight to reach your dream. You have to sacrifice and work hard for it.”</p>
-						<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/messi.jpg">
+						<img src="{{ url_for('product.static', filename='images/messi.jpeg') }}">
 						<h3>Lionel Messi</h3>
 					</div>
 					<div class="col-3">
 						<i class="fa fa-quote-left"></i>
 						<p>“The more difficult the victory, the greater the happiness in winning.”</p>
-						<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/pele.jpg">
+						<img src="{{ url_for('product.static', filename='images/pele.jpeg') }}">
 						<h3>Pelé</h3>
 					</div>
 					<div class="col-3">
 						<i class="fa fa-quote-left"></i>
 						<p>“When people succeed, it is because of hard work. Luck has nothing to do with success.”</p>
-						<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/maradona.jpg">
+						<img src="{{ url_for('product.static', filename='images/maradona.jpeg') }}">
 						<h3>Diego Maradona</h3>
 					</div>
 				</div>

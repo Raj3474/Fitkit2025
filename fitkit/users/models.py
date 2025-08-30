@@ -1,6 +1,8 @@
 from datetime import datetime
 from fitkit import db, login_manager
 from flask_login import UserMixin
+from itsdangerous import URLSafeTimedSerializer as Serializer
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -17,7 +19,21 @@ class User(db.Model, UserMixin):
     cart = db.relationship('Cart', back_populates='cart_user', lazy=True)
     order = db.relationship('Order', back_populates='order_user', lazy=True)
     
-
+    def secret_token(self):
+        from fitkit import app
+        s = Serializer(app.config['SECRET_KEY'])
+        return s.dumps({'user_id': self.id})
+    
+    @staticmethod
+    def verify_token(token, expiration=1800):
+        from fitkit import app
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token, max_age=expiration)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
+        
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}'')"
@@ -40,7 +56,7 @@ class Cart(db.Model):
 
 
     def __repr__(self):
-        return f"Post({self.quantity}, {self.size}, {self.product.name})"
+        return f"Cart({self.quantity}, {self.size}, {self.product.name})"
     
 
 class Order(db.Model):
@@ -64,3 +80,5 @@ class Order(db.Model):
 
     # def __repr__(self):
     #     return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+
+

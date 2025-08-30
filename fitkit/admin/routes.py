@@ -1,8 +1,8 @@
 from flask import Blueprint, flash, jsonify, render_template, current_app, request, url_for, redirect, session
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
-from fitkit.utils import generateOTP, send_Email, upload_img, remove_img
+from fitkit.utils import send_Email, upload_img
 from functools import wraps
-from flask_login import current_user
+from flask_login import current_user, logout_user
 from fitkit import db
 from fitkit.config import Config
 from fitkit.users.routes import login
@@ -13,8 +13,7 @@ from fitkit.admin.forms import AddProductForm
 
 import secrets
 
-ADMIN_LOGIN_ID=Config.ADMIN_LOGIN_ID
-ADMIN_LOGIN_PASS=Config.ADMIN_LOGIN_PASS
+
 
 admin = Blueprint('admin', __name__,
                         template_folder='templates', static_folder='static')
@@ -88,7 +87,7 @@ def completedOrders():
 
 
 @admin.route("/add_product", methods=["GET", "POST"])
-# @admin_required
+@admin_required
 def addProduct():
     form = AddProductForm()
 
@@ -178,13 +177,15 @@ def editProduct(product):
         flash('Product updated successfully', 'success')
         return redirect(url_for('admin.allProducts'))
     elif request.method == 'GET':
+        print('inside get')
         form.name.data = product.name
         form.description.data = product.description
         form.price.data = product.price
         form.sizes.data = product.sizes.split(',')
         print(form.data)
         print(form.image.data)
-       
+    
+    
     return render_template("admin/edit_product.html", form=form, product=product)
 
 
@@ -196,99 +197,13 @@ def index():
     return redirect(login)
 
 
-@admin.route("/otp", methods=["POST"])
-def otp():
-
-    if not request.form.get('otp'):
-
-        return jsonify(
-                {
-                    "status" : "error",
-                    "message" : "Otp Missing"
-                })
-
-    elif not session.get("otp") == request.form.get('otp'):
-
-        session['otp'] = generateOTP()
-        return jsonify(
-                {
-                    "status" : "error",
-                    "message" : "Invalid Otp!"
-                })
-
-    else:
-        session.clear()
-        session['admin'] = True
-        return jsonify(
-                {
-                    "status" : "success",
-                    "message" : "Otp Matched"
-                })
-
-""" remove a product """
-@admin.route("/removeProduct")
-def remove_product():
-
-    if True: # session.get('admin')
-
-        p = request.args.get('p')
-
-        # do the database deletion
-        with db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute("DELETE FROM products WHERE (product_id=(%s))", (p,))
-
-        remove_img(productId=p)
-        return jsonify(True)
-    else:
-        return "Method Not allowed"
-
-
-
-
-""" adding a new product """
-@admin.route("/add_product", methods=["POST"])
-@admin_required
-def add_product():
-
-    if True: # session.get('admin')
-
-        if 'file' not in request.files:
-            flash(u"No file part", "danger")
-            return redirect(request.url)
-
-        prodname = request.form.get("product")
-        price = request.form.get("price")
-        proddesc = request.form.get("productdesc")
-
-        sizes = request.form.getlist("size")  # taking all the sizes input by the user via form.getlist
-        sizes_available = ""
-        for size in sizes:
-            sizes_available = sizes_available + ", " + size
-        sizes_available = sizes_available.lstrip(', ')
-
-        files = request.files.getlist("file")
-
-        with db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"INSERT INTO products (product_name, product_desc, price, sizes_available) VALUES ({prodname}, {proddesc}, {price}, {sizes_available})", (prodname, proddesc, price, sizes_available,))
-                product_id
-
-        upload_img(files, product_id)
-
-        return redirect('/admin/dashboard')
-
-    return redirect("/admin")
-
-
-
 """ admin loggin out """
 @admin.route("/logout")
 @admin_required
 def logout():
 
     # Forget any user_id
-    session.clear()
+    logout_user()
 
     # Redirect user to login form
     return redirect("/admin")

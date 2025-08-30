@@ -1,23 +1,31 @@
 import os
 import tempfile
 
+from dotenv import load_dotenv
+load_dotenv()
+
 class Config:
+    print("Loading Config...")
 
-    ADMIN_EMAIL = '' # os.environ.get("ADMIN_EMAIL")
-    ADMIN_EMAIL_PASS = '' # os.environ.get("ADMIN_EMAIL_PASS")
-
-    ADMIN_LOGIN_ID = '' # os.environ.get("ADMIN_LOGIN_ID")
-    ADMIN_LOGIN_PASS= '' #os.environ.get("ADMIN_LOGIN_PASS")
-
-    RPAY_KEY = '' # os.environ.get("RPAY_KEY")
-    RPAY_SECRET = '' # os.environ.get("RPAY_SECRET")
-
-    S3_BUCKET = '' # os.environ.get("S3_BUCKET")
-    S3_KEY = '' # os.environ.get("S3_KEY")
-    S3_SECRET = '' #os.environ.get("S3_SECRET")
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = os.environ.get('EMAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+    
 
 
-    SECRET_KEY = 'd8f3efea434853075f253b7e7fad1210'
+    S3_BUCKET = os.environ.get('S3_BUCKET')
+    S3_KEY = os.environ.get('S3_KEY')
+    S3_SECRET = os.environ.get('S3_SECRET')
+
+
+    RAZORPAY_KEY=os.environ.get('RAZORPAY_KEY')
+    RAZORPAY_SEC_ID=os.environ.get('RAZORPAY_SEC_ID')
+    
+    SECRET_KEY=os.environ.get('SECRET_KEY')
+
+
     # Ensure templates are auto-reloaded
     TEMPLATES_AUTO_RELOAD = True
 
@@ -32,19 +40,19 @@ class Config:
     
     # this is for testing, use os.environ.get('SQLALCHEMY_DATABASE_URI) in prod
     SQLALCHEMY_DATABASE_URI='sqlite:///mydatabase.db' ## for working with sqlite in the flask app
+
     
-    # DBNAME = os.environ.get("DBNAME")
-    # USER = os.environ.get("USER")
+
+    # DB_NAME = os.environ.get("DB_NAME")
+    # USER_NAME = os.environ.get("USER_NAME")
     # PASSWORD = os.environ.get("PASSWORD")
     # HOST = os.environ.get("HOST")
 
-    # db_connection = psycopg2.connect(
-    #     dbname=DBNAME,
-    #     user=USER,
-    #     password=PASSWORD,
-    #     host=HOST,
-    #     port=5432
-    # )
+    # try:
+    #     SQLALCHEMY_DATABASE_URI='mysql+pymysql://USERNAME:PASSWORD@HOST/DB_NAME'
+    #     SQLALCHEMY_TRACK_MODIFICATIONS=False # Optional, to suppress a warning
+    # except Exception as e:
+    #     print("Error in DB connection string:", e)
 
 
     

@@ -10,7 +10,7 @@
 		<title>{% block title %}{% endblock %}</title>
 
 		<!--stylesheets-->
-		<link rel="stylesheet" href="{{ url_for('product.static', filename='css/style.css') }}">
+		<link rel="stylesheet" href="{{ url_for('product.static', filename='css/layout.css') }}">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 		{% block css %}{% endblock %}
@@ -38,26 +38,37 @@
 			<div class="container navbar-container">
 				<div class="navbar">
 					<div class="logo">
-						<a href="/"><img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/fitkit_logo.jpg" width="150px" height="50px"></a>
+						<a href="/"><img src="{{ url_for('product.static', filename='images/logo.png') }}" width="150px" height="50px"></a>
 					</div>
 					<nav>
 						<ul id="MenuItems">
 							<li><a href="/">Home</a></li>
-							<li><a href="/product">Products</a></li>
-							<li><a href="/about">About</a></li>
-							<li><a href="/contact">Contact</a></li>
+							<li><a href="{{ url_for('product.products') }}">Products</a></li>
 							{% if not current_user.is_authenticated %}
-								<li><a href="/users/login">Login</a></li>
+								<li><a href="{{ url_for('users.login') }}">Login</a></li>
 							{% else %}
-								<li><a href="/users/logout">Logout</a></li>
+								<li><a href="{{ url_for('users.myCart') }}">Cart</a></li>
+								<li><a href="{{ url_for('users.myOrders') }}">Orders</a></li>
+								<li><a href="{{ url_for('users.logout') }}">Logout</a></li>
 							{% endif %}
 						</ul>
 					</nav>
-					{% if session.user_id %}
-						<a href="/myCart"><img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/cart_logo.png" width="30px" height="30px"></a>
-					{% endif %}
-					<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/menu_logo.png" class="menu-icon"
-					onclick="menutoggle()">
+						
+						<div class="menu-icon" onclick="menutoggle()">
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+						<style>
+						.menu-icon>div {
+							width: 35px;
+							height: 5px;
+							background-color: black;
+							margin: 6px 0;
+							cursor: pointer
+							}
+					</style>
+					
 				</div>
 			</div>
 		</div>
@@ -71,7 +82,7 @@
 			<div class="footer-container">
 				<div class="row">
 					<div class="footer-col-1">
-						<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/fitkit_logo.jpg">
+						<img src="{{ url_for('product.static', filename='images/logo_small.png') }}">
 
 						<p>Our Purpose Is To Sustainably Make the Pleasure
 						and Benefits of Sports Accessible to the Many. </p>

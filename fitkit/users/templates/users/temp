@@ -1,0 +1,41 @@
+{% extends "users/layout.html" %}
+
+{% block title %}
+    Password Reset | Fitkit
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="/users/static/css/forgot_password.css">
+{% endblock %}
+
+
+{% block main %}
+
+		<!--------------- account page ------------>
+		<div class="forgot-password-container">
+			<div class="row">
+				<div class="col-2">
+					<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/logo3.jpg">
+				</div>
+				<div class="col-2">
+					<div class="form-container">
+
+						
+
+						<div id="Otp-form">
+							<p>Otp</p>
+							<div class="otp-mssg">An otp has been sent to your Email Address. Enter the OTP</div>
+							<form method="post">
+								<input type="text" placeholder="Otp" name="otp" autocomplete="off">
+								<br>
+								<button type="submit" class="btn">Submit Otp</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+{% endblock %}

@@ -9,11 +9,11 @@ from functools import wraps # for using decorators
 from PIL import Image
 
 from fitkit.config import Config
-from fitkit.resources import get_bucket
 
 
-ADMIN_EMAIL=Config.ADMIN_EMAIL
-ADMIN_EMAIL_PASS=Config.ADMIN_EMAIL_PASS
+MAIL_USERNAME=Config.MAIL_USERNAME
+MAIL_PASSWORD=Config.MAIL_PASSWORD
+
 def login_required(f):
     """
     Decorate routes to require login.
@@ -29,13 +29,13 @@ def login_required(f):
 
 
 ''' for sending email using smtp '''
-def send_Email(message, receiver_email=ADMIN_EMAIL):
+def send_Email(message, receiver_email=MAIL_USERNAME):
 
     port = 465
     smtp_server = "smtp.gmail.com"
 
-    sender_email = ADMIN_EMAIL
-    password = ADMIN_EMAIL_PASS
+    sender_email = MAIL_USERNAME
+    password = MAIL_PASSWORD
 
 
     context = ssl.create_default_context()
@@ -51,7 +51,7 @@ def send_Email(message, receiver_email=ADMIN_EMAIL):
 
 
 """ for the generation otp """
-def generateOTP(receiver_email=ADMIN_EMAIL) :
+def generateOTP(receiver_email=MAIL_USERNAME) :
 
 
     print(receiver_email)
@@ -80,8 +80,6 @@ def generateOTP(receiver_email=ADMIN_EMAIL) :
 def upload_img(form_image):
     
     random_hex = secrets.token_hex(8)
-    
-
     
     # my_bucket = get_bucket()
 
@@ -123,16 +121,16 @@ def upload_img(form_image):
     
 
 
-def remove_img(productId):
+# def remove_img(productId):
 
-    print(productId)
-    my_bucket = get_bucket()
+#     print(productId)
+#     my_bucket = get_bucket()
 
-    img_index = ['a', 'b', 'c', 'd']
-    for i in img_index:
-        filename = str(productId) + i + '.jpg'
-        print(filename)
-        try:
-            my_bucket.Object('images/' + filename).delete()
-        except:
-            print('object not found')
+#     img_index = ['a', 'b', 'c', 'd']
+#     for i in img_index:
+#         filename = str(productId) + i + '.jpg'
+#         print(filename)
+#         try:
+#             my_bucket.Object('images/' + filename).delete()
+#         except:
+#             print('object not found')

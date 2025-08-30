@@ -1,30 +1,17 @@
 /*---------------- All products ----------------*/
-
+.small-container{
+	max-width: 1080px;
+	margin: 50px auto;
+	padding: 0 25px;
+}
 
 .page-btn{
-	margin: 0 auto 80px;
-}
-
-.page-btn a{
-	display: inline-block;
-	border: 1px solid #ff523b;
-	margin-left: 10px;
-	width: 40px;
-	height: 40px;
-	text-align: center;
-	line-height: 40px;
-	cursor: pointer;
-}
-
-.page-btn a:hover:not(.active){
-	background: #ff523b;
-	color: #fff;
-}
-
-
-.page-btn .active{
-	background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
 
 }

@@ -191,6 +191,12 @@ ul{
 	list-style-type: none;
 }
 
+.menu-icon{
+	display: block;
+	cursor: pointer;
+	display: none;
+}
+
 /*------------ for form input*/
 input, textarea, select{
 	border: 1px solid #ccc;
@@ -272,8 +278,13 @@ input:focus, textarea:focus, select:focus{
 		padding: 15px 0 !important;
 	}
 
+	.logo{
+		flex-grow: 1;
+		text-align: center;
+	}
+
 	.logo img{
-		width: 60%;
+		width: 85%;
 	}
 
 	.footer-col-1, .footer-col-2, .footer-col-3{
@@ -304,6 +315,170 @@ input:focus, textarea:focus, select:focus{
 	}
 	.col-4{
 		margin-bottom: 10px;
+	}
+
+}
+
+
+
+/*-------------- media query for menu --------------*/
+
+@media only screen and (max-width: 800px)
+{
+
+	#index-heading{
+		margin: 15px 0;
+		font-size: 40px;
+		line-height: 35px;
+	}
+
+	#index-para{
+		margin-top: 40px;
+	}
+
+	nav ul{
+		position: absolute;
+		top: 110px;
+		left: 0;
+		background:#333;
+		width: 100%;
+		overflow: hidden;
+		transition: max-height 0.5s;
+		z-index: 2;
+	}
+
+	nav ul li{
+		display: block;
+		margin-right: 50px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	nav ul li a{
+		color: #fff;
+	}
+
+	.menu-icon{
+		display: block;
+		cursor: pointer;
+	}
+	.col-3{
+		min-width: 230px;
+	}
+	.col-4{
+		flex-basis: 40%;
+	}
+
+	.col-2 img{
+ 	width: 80%;
+	}
+ 	.offer{
+		margin-top: 20px;
+    padding: 0px 0;
+	}
+
+	.latest-row{
+		text-align: center;
+	}
+
+	.testimonial .col-3{
+		padding: 48px 15px;
+	}
+
+	.brands{
+		margin: 70px auto;
+	}
+
+	.col-5{
+		padding: 5px;
+    	width: 140px;
+	}
+}
+
+@media only screen and (max-width: 996px){
+	.footer-col-1{
+		flex: 100%;
+		/*padding: 0 100px;*/
+	}
+
+
+}
+/*----------- media query for less than 600 screen size -------------*/
+@media only screen and (max-width: 600px){
+	.container{
+		padding: 0 10px;
+	}
+
+	.navbar{
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	.header .row{
+		margin: 0px;
+		padding: 10px 0;
+		text-align: center;
+	}
+
+	.landing-page-img img{
+		padding: 22px 0;
+	}
+
+	#index-para{
+		padding-left: 25px;
+    padding-right: 25px;
+	}
+	.row{
+		text-align: center;
+	}
+	.col-2, .col-3{
+		flex-basis: 95%;
+		margin-bottom: 15px;
+	}
+
+	.col-4{
+		flex-basis: 95%;
+		margin-bottom: 25px;
+	}
+
+	.offer-col-2 h1{
+		font-size: 34px;
+    	line-height: 11px;
+    	margin: 20px 0;
+	}
+
+
+	.logo img{
+		width: 60%;
+	}
+
+
+
+	.footer-col-1, .footer-col-2, .footer-col-3{
+		margin-bottom: 5px;
+	}
+
+	.footer h3{
+		margin-bottom: 0px;
+	}
+
+	.footer hr{
+		margin: 3px 0;
+	}
+
+	.footer-container{
+		width: 95%;
+	}
+
+	.footer-col-1 p{
+		padding: 0 15px;
+	}
+
+	.testimonial .col-3{
+		padding-left: 10px;
+		padding-right: 10px;
+		min-width: 220px;
+		margin-bottom: 20px;
 	}
 
 }

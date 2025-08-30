@@ -405,8 +405,12 @@ input:focus, textarea:focus, select:focus{
 		padding: 15px;
 	}
 
+	.logo{
+		flex-grow: 1;
+	}
+
 	.logo img{
-		width: 60%;
+		width: 85%;
 	}
 
 	.footer-col-1, .footer-col-2, .footer-col-3{
