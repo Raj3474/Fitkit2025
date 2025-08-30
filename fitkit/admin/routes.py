@@ -1,10 +1,9 @@
-from flask import Blueprint, flash, jsonify, render_template, current_app, request, url_for, redirect, session
+from flask import Blueprint, flash, jsonify, render_template, request, url_for, redirect
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from fitkit.utils import send_Email, upload_img
 from functools import wraps
 from flask_login import current_user, logout_user
 from fitkit import db
-from fitkit.config import Config
 from fitkit.users.routes import login
 
 from fitkit.users.models import Order
@@ -188,13 +187,6 @@ def editProduct(product):
     
     return render_template("admin/edit_product.html", form=form, product=product)
 
-
-
-@admin.route("/login", methods=["GET", "POST"])
-def index():
-
-    session.clear()
-    return redirect(login)
 
 
 """ admin loggin out """

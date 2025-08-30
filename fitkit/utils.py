@@ -1,9 +1,8 @@
 import smtplib, ssl
-import io
 import secrets
 import math, random
 import os
-from flask import current_app, url_for, redirect, render_template, request, session
+from flask import current_app, redirect, session
 from functools import wraps # for using decorators
 
 from PIL import Image
