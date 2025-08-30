@@ -102,8 +102,6 @@ def addProduct():
         db.session.add(p)
         db.session.commit()  # Assuming this function handles the image upload
         return redirect(url_for('admin.allProducts'))
-        
-        
 
     return render_template("admin/add_product.html", form=form)
 
