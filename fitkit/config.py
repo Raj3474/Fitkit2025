@@ -12,7 +12,7 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('EMAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-    
+
 
 
     S3_BUCKET = os.environ.get('S3_BUCKET')
@@ -22,7 +22,7 @@ class Config:
 
     RAZORPAY_KEY=os.environ.get('RAZORPAY_KEY')
     RAZORPAY_SEC_ID=os.environ.get('RAZORPAY_SEC_ID')
-    
+
     SECRET_KEY=os.environ.get('SECRET_KEY')
 
 
@@ -37,22 +37,23 @@ class Config:
     '''
     setting up our database connection.
     '''
-    
+
     # this is for testing, use os.environ.get('SQLALCHEMY_DATABASE_URI) in prod
-    SQLALCHEMY_DATABASE_URI='sqlite:///mydatabase.db' ## for working with sqlite in the flask app
-
-    
-
-    # DB_NAME = os.environ.get("DB_NAME")
-    # USER_NAME = os.environ.get("USER_NAME")
-    # PASSWORD = os.environ.get("PASSWORD")
-    # HOST = os.environ.get("HOST")
-
-    # try:
-    #     SQLALCHEMY_DATABASE_URI='mysql+pymysql://USERNAME:PASSWORD@HOST/DB_NAME'
-    #     SQLALCHEMY_TRACK_MODIFICATIONS=False # Optional, to suppress a warning
-    # except Exception as e:
-    #     print("Error in DB connection string:", e)
+    # SQLALCHEMY_DATABASE_URI='sqlite:///mydatabase.db' ## for working with sqlite in the flask app
 
 
-    
+
+    DB_NAME = os.environ.get("DB_NAME")
+    USER_NAME = os.environ.get("USER_NAME")
+    PASSWORD = os.environ.get("PASSWORD")
+    HOST = os.environ.get("HOST")
+
+    print(DB_NAME, HOST)
+
+    try:
+        SQLALCHEMY_DATABASE_URI='mysql+pymysql://USERNAME:PASSWORD@HOST/DB_NAME'
+        SQLALCHEMY_TRACK_MODIFICATIONS=False # Optional, to suppress a warning
+    except Exception as e:
+        print("Error in DB connection string:", e)
+
+
