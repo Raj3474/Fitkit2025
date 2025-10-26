@@ -18,14 +18,9 @@ mail=Mail()
 
 
 print("Creating app...")
-print("......")
 def create_app(config_class=Config):
-    print("Creating app......")
     app = Flask(__name__)
     app.config.from_object(Config)
-
-    print(Config.SECRET_KEY)
-    print(Config.RAZORPAY_KEY)
 
     db.init_app(app)
     bcrypt.init_app(app)
