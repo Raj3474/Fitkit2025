@@ -38,22 +38,21 @@ class Config:
     setting up our database connection.
     '''
 
-    # this is for testing, use os.environ.get('SQLALCHEMY_DATABASE_URI) in prod
-    # SQLALCHEMY_DATABASE_URI='sqlite:///mydatabase.db' ## for working with sqlite in the flask app
+    SQLALCHEMY_DATABASE_URI='sqlite:///mydatabase.db' ## for working with sqlite in the flask app
 
 
-
+    DB_HOST = os.environ.get("DB_HOST")
+    DB_USERNAME = os.environ.get("DB_USERNAME")
+    DB_PASSWORD = os.environ.get("DB_PASSWORD")
     DB_NAME = os.environ.get("DB_NAME")
-    USER_NAME = os.environ.get("USER_NAME")
-    PASSWORD = os.environ.get("PASSWORD")
-    HOST = os.environ.get("HOST")
 
-    print(DB_NAME, HOST)
 
-    try:
-        SQLALCHEMY_DATABASE_URI='mysql+pymysql://USERNAME:PASSWORD@HOST/DB_NAME'
-        SQLALCHEMY_TRACK_MODIFICATIONS=False # Optional, to suppress a warning
-    except Exception as e:
-        print("Error in DB connection string:", e)
+    # print(DB_NAME, DB_HOST, DB_USERNAME, DB_PASSWORD)
+
+    # try:
+    #     SQLALCHEMY_DATABASE_URI='mysql+pymysql://DB_USERNAME:DB_PASSWORD@DB_HOST/DB_NAME'
+    #     SQLALCHEMY_TRACK_MODIFICATIONS=False # Optional, to suppress a warning
+    # except Exception as e:
+    #     print("Error in DB connection string:", e)
 
 
