@@ -77,47 +77,64 @@ def generateOTP(receiver_email=MAIL_USERNAME) :
     return OTP
 
 def upload_img(form_image):
-    
+
     random_hex = secrets.token_hex(8)
-    
+
     # my_bucket = get_bucket()
 
     i = 0
     for file in form_image:
         _, f_ext = os.path.splitext(file.filename)
 
+        print(f_ext, _, file.mode)
 
-        # convert png to jpeg
-        if f_ext.lower() == '.png':
-            if file.mode != 'RGBA':
-                f_ext = '.jpg'
-                file = file.convert('RGB')
+        # # convert webp to jpeg
+        # if f_ext.lower() == '.webp':
+        #         file = file.convert('RGB')
 
 
-        # convert jpg to jpeg
-        if f_ext.lower() == '.jpg':
-            f_ext = '.jpeg'
-  
+        # # convert png to jpeg
+        # if f_ext.lower() == '.png':
+        #     if file.mode == 'RGBA':
+        #         file = file.convert('RGB')
 
-        image_name = f"{random_hex}_{str(i)}{f_ext}"
+
+        # # convert jpg to jpeg
+        # if f_ext.lower() == '.jpg':
+        #     f_ext = '.jpeg'
+
+
+        image_name = f"{random_hex}_{str(i)}.jpeg"
         print(image_name)
+        print('file and filemode', file.mode, file.filename)
         picture_path = os.path.join(current_app.blueprints['product'].root_path, 'static/images', image_name)
         file.save(picture_path)
+
+        if i == 0:
+            # Create a thumbnail for the product image
+            thumbnail_image_name = random_hex + '_thumbnail' + '.jpeg'
+            thumbnail_path = os.path.join(current_app.blueprints['product'].root_path, 'static/images', thumbnail_image_name)
+
+            output_size = (500, 500)
+
+            print(file)
+            img = Image.open(file)
+
+            # print(i.mode, i)
+
+            # convert webp to jpeg
+            if img.mode == 'RGBA':
+                img = img.convert('RGB')
+
+            img.thumbnail(output_size)
+
+            img.save(thumbnail_path)
+
         i += 1
-
-    # Create a thumbnail for the product image
-    thumbnail_image_name = random_hex + '_thumbnail' + f_ext
-    thumbnail_path = os.path.join(current_app.blueprints['product'].root_path, 'static/images', thumbnail_image_name)
-    
-    output_size = (500, 500)
-    i = Image.open(form_image[0])
-    i.thumbnail(output_size)
-
-    i.save(thumbnail_path)
 
     return random_hex
 
-    
+
 
 
 # def remove_img(productId):

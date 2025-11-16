@@ -11,7 +11,7 @@
 
 {% block main %}
 
-		
+
 		<!--------------- Orders ------------->
 
 		<div class="small-container order-page">
@@ -32,7 +32,7 @@
 						<tr class="last-row-of-an-order">
 							<td>
 								<div class="cart-info">
-									<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+									<img src="{{ url_for('product.static', filename='images' + order.product.image + '_thumbnail.jpeg' ) }}">
 									<div>
 										<p>{{ order.product.name }}</p>
 									</div>
@@ -73,7 +73,7 @@
 						<tr  class="last-row-of-an-order">
 							<td>
 								<div class="cart-info">
-									<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+									<img src="{{ url_for('product.static', filename='images/' + order.product.image + '_thumbnail.jpeg' ) }}">
 									<div>
 										<p>{{ order.product.name }}</p>
 									</div>
