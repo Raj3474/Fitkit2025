@@ -241,7 +241,11 @@ def login():
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('product.index'))
         else:
+            # print("Login Unsuccessful. Please check email and password")
             flash('Login Unsuccessful. Please check email and password', 'danger')
+    if request.method == "POST":
+        flash('Login Unsuccessful. Please check email and password', 'danger')
+    
     return render_template('users/login.html', form=form)
 
 

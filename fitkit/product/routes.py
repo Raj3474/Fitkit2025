@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, abort
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from fitkit.product.models import Product
+import os
 
 product = Blueprint('product', __name__,
                         template_folder='templates', static_folder='static', static_url_path='/product/static')
@@ -32,6 +33,7 @@ def index(page=1):
     else:
         abort(403)
 
+    print(sort_by, page, items, os.getenv('DB_NAME'))
     return render_template("product/index.html", items=items, sort=sort_by)
 
 

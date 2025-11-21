@@ -14,7 +14,10 @@
 		<div class="small-container single-product">
 			<div class="row">
 				<div class="col-2">
-					<img src="{{ url_for('product.static', filename='images/' + product.image + '_0.jpeg') }}" width="250px" height="320px" id="ProductImg">
+					<div class="big-img">
+						<img src="{{ url_for('product.static', filename='images/' + product.image + '_0.jpeg') }}" id="ProductImg">
+					</div>
+					
 
 					<div class="small-img-row">
 						{% for i in range(product.num_images) %}

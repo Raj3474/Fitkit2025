@@ -39,7 +39,7 @@
 }
 
 select {
-    border: 1px solid #ff523b;
+    border: 1.5px solid #148c8d;
     padding: 5px;
 }
 
@@ -55,7 +55,7 @@ select {
 	padding: 10px;
 	font-size: 20px;
 	margin-right: 10px;
-	border: 1px solid #ff523b;
+	border: 1px solid #148c8d;
 
 }
 
@@ -68,6 +68,10 @@ input:focus{
 	margin-left: 10px;
 }
 
+.big-img img{
+	height: 150px;
+
+}
 .small-img-row{
 	display: flex;
 	justify-content: center;

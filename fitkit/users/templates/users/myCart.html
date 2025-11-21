@@ -17,7 +17,7 @@
 
 			<div class="link">
 				<i class="fa fa-caret-right"></i>
-				<a href="{{ url_for('users.myOrders') }}">My Orders &#8594;</a>
+				<button class="btn"><a href="{{ url_for('users.myOrders') }}">My Orders &#8594;</a></button> 
 			</div>
 
 			{% if cart_items|length > 0 %}

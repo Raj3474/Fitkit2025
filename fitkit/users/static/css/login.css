@@ -23,12 +23,15 @@
 	transition: transform 0.5s;
 }
 
+
+form .btn{
+	padding: 3px;
+}
 .form-container span{
 	font-weight: bold;
 	padding: 0 10px;
 	color: #555;
 	cursor: pointer;
-	width: 100px;
 	display: inline-block;
 
 }
