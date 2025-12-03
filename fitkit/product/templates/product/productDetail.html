@@ -1,119 +1,127 @@
 {% extends "product/layout.html" %}
 
 {% block title %}
-    Product Detail | Fitkit
+Product Detail | Fitkit
 {% endblock %}
 
 {% block css %}
-	<link rel="stylesheet" href="{{ url_for('product.static', filename='css/singleProduct.css') }}">
+<link rel="stylesheet" href="{{ url_for('product.static', filename='css/singleProduct.css') }}">
 {% endblock %}
 
 {% block main %}
-	<!------------ A single Product detail -------->
+<!------------ A single Product detail -------->
 
-		<div class="small-container single-product">
-			<div class="row">
-				<div class="col-2">
-					<div class="big-img">
-						<img src="{{ url_for('product.static', filename='images/' + product.image + '_0.jpeg') }}" id="ProductImg">
-					</div>
-					
+<div class="container">
+  <div class="single-product-row">
 
-					<div class="small-img-row">
-						{% for i in range(product.num_images) %}
-							<div class="small-img-col">
-							<img src="{{ url_for('product.static', filename='images/' + product.image + '_' + i|string +'.jpeg') }}" width="100%" class="small-img">
-						</div>
-						{% endfor %}
-					</div>
-				</div>
-				<div class="col-2">
-					<div class="product-detail">
-						<p>Home / jerseys</p>
-						<h1>{{ product.product_name }}</h1>
-						<h4>&#8377; {{ product.price }}</h4>
+    <div class="product-img-col">
 
-						<form action="{{ url_for('users.addToCart') }}", method="post">
-							{% if product.is_active == False %}
-								<p style="color: red; font-weight: bold;">Out of Stock</p>
-							{% else %}
-							<input style="display:none" type="text" name="p" value="{{ product.id }}">
-							<select name="s">
-								<option disabled Selected>Select Size</option>
-								{% for size in sizes %}
-								<option value="{{ size }}">
-									{% if size == 's' %}
-										Small
-									{% elif size == 'm' %}
-										Medium
-									{% elif size == 'l' %}
-										Large
-									{% elif size == 'xl' %}
-										XL
-									{% else %}
-										XXL
-									{% endif %}
-								</option>
-								{% endfor %}
-							</select>
-							<input name="q" type="number" value="1" min="1">
-							<button class="btn">Add To Cart</button>
-							{% endif %}
-						</form>
-						<h3>Product Details <span class="fa fa-indent"></span></h3>
-						<p>
-							{{ product.description }}
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
+      <div class="big-img">
+        <img src="{{ url_for('product.static', filename='images/' + product.image + '_0.jpeg') }}" id="ProductImg">
+      </div>
 
-		<!------------- title ----------->
-		<div class="small-container">
-			<div class="row row-2">
-				<h2>Related Products</h2>
-				<a href="{{ url_for('product.products') }}"><p>View More</p></a>
-			</div>
+      <div class="small-img-row">
+        {% for i in range(product.num_images) %}
+        <div class="small-img-col">
+          <img src="{{ url_for('product.static', filename='images/' + product.image + '_' + i|string +'.jpeg') }}"
+            width="100%" class="small-img">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
 
-		</div>
+    <div class="product-detail-col">
+        <p>Home / jerseys</p>
+        <h1>{{ product.product_name }}</h1>
+        <h4>&#8377; {{ product.price }}</h4>
+
+        <form class="single-product-detail-form" action="{{ url_for('users.addToCart') }}" , method="post">
+          {% if product.is_active == False %}
+          <p style="color: red; font-weight: bold;">Out of Stock</p>
+          {% else %}
+          <input style="display:none" type="text" name="p" value="{{ product.id }}">
+          <select name="s">
+            <option disabled Selected>Select Size</option>
+            {% for size in sizes %}
+            <option value="{{ size }}">
+              {% if size == 's' %}
+              Small
+              {% elif size == 'm' %}
+              Medium
+              {% elif size == 'l' %}
+              Large
+              {% elif size == 'xl' %}
+              XL
+              {% else %}
+              XXL
+              {% endif %}
+            </option>
+            {% endfor %}
+          </select>
+          <input name="q" type="number" value="1" min="1">
+          <button class="btn">Add To Cart</button>
+          {% endif %}
+        </form>
+        <h3>Product Details <span class="fa fa-indent"></span></h3>
+        <p>
+          {{ product.description }}
+        </p>
+    </div>
 
 
-		<!------------ Related products ----------------->
-		<div class="small-container">
-			<div class="row">
-				{% for product in related_products %}
-				<div class="col-4">
-					<a href="{{ url_for('product.detail', product_id=product.id) }}">
-					<img src="{{ url_for('product.static', filename='images/' + product.image + '_thumbnail.jpeg') }}">
-					<h4>{{ product.product_name }}</h4>
-					<p>&#8377; {{ product.price }}</p>
-					</a>
-				</div>
-				{% endfor %}
-			</div>
-		</div>
+  </div>
 
 
-		<!----------- js for product details --------------->
-		<script>
-			var ProductImg = document.getElementById("ProductImg");
-			var SmallImg = document.getElementsByClassName("small-img");
+  
+  <div class="related-product-container">
+    <!------------- title ----------->
+    <div class="related-product-title">
+      <div><h2>Related Products</h2></div>
+      <div>
+        <a href="{{ url_for('product.products') }}">
+        <p>View More</p>
+      </a>
+      </div>
+      
+    </div>
 
-			SmallImg[0].onclick = function() {
-				ProductImg.src = SmallImg[0].src;
-			}
+  
+    <div class="related-product-item-row">
+      <!------------ Related products ----------------->
+      {% for product in related_products %}
+      <div class="related-product">
+        <a href="{{ url_for('product.detail', product_id=product.id) }}">
+          <img src="{{ url_for('product.static', filename='images/' + product.image + '_thumbnail.jpeg') }}">
+          <h4>{{ product.product_name }}</h4>
+          <p>&#8377; {{ product.price }}</p>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 
-			SmallImg[1].onclick = function() {
-				ProductImg.src = SmallImg[1].src;
-			}
+</div>
 
-			SmallImg[2].onclick = function() {
-				ProductImg.src = SmallImg[2].src;
-			}
 
-			SmallImg[3].onclick = function() {
-				ProductImg.src = SmallImg[3].src;
-			}
-		</script>
+<!----------- js for product details --------------->
+<script>
+  var ProductImg = document.getElementById("ProductImg");
+  var SmallImg = document.getElementsByClassName("small-img");
+
+  SmallImg[0].onclick = function () {
+    ProductImg.src = SmallImg[0].src;
+  }
+
+  SmallImg[1].onclick = function () {
+    ProductImg.src = SmallImg[1].src;
+  }
+
+  SmallImg[2].onclick = function () {
+    ProductImg.src = SmallImg[2].src;
+  }
+
+  SmallImg[3].onclick = function () {
+    ProductImg.src = SmallImg[3].src;
+  }
+</script>
 {% endblock %}

@@ -105,11 +105,13 @@ p{
 	color: #555;
 }
 
-.logo img{
- 	width: 280px;
-    height: 130px;
+.logo img {
+    width: 180px;
+    height: 70px;
     border-radius: 10px;
 }
+
+
 
 
 
