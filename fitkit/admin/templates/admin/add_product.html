@@ -13,9 +13,9 @@
 		<!--------------- all products ------------->
 
 	<div class="add-product-container">
+    <h2>Add Product</h2>
 		<form method="POST" action="/admin/add_product" class="add_product" enctype="multipart/form-data" novalidate>
             {{ form.hidden_tag() }}
-            <h2>Add Product</h2>
 
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group form-upload-image">
                 {{ form.image.label(class="form-control-label") }}
                     {% if form.image.errors %}
                         {{ form.image(class="form-control form-control-lg is-invalid") }}

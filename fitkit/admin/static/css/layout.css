@@ -146,8 +146,8 @@ p{
 /*------------- footer --------------*/
 
 .footer{
-	background: #000;
-    color: #8a8a8a;
+	background-color: #e6e7e8;
+    color: #58595b;
     font-size: 60px 20px;
     padding: 23px 0 14px;
 	overflow: auto;
@@ -160,11 +160,11 @@ p{
 }
 
 .footer p{
-	color: #8a8a8a;
+	color: #0c0b0b;
 }
 
 .footer h3{
-	color: #fff;
+	color: #0a0a0a;
 	margin-bottom: 20px;
 
 }

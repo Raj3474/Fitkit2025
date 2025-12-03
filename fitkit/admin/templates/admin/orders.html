@@ -32,7 +32,7 @@
 						<tr class="last-row-of-an-order">
 							<td>
 								<div class="cart-info">
-									<img src="{{ url_for('product.static', filename='images' + order.product.image + '_thumbnail.jpeg' ) }}">
+									<img src="{{ url_for('product.static', filename='images/' + order.product.image + '_thumbnail.jpeg' ) }}">
 									<div>
 										<p>{{ order.product.name }}</p>
 									</div>

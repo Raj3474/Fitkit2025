@@ -1,7 +1,7 @@
 /*-------------- cart items -----------------*/
 
 .link{
-	padding: 20px;
+	padding: 10px;
 }
 
 .fa-caret-right {
@@ -10,6 +10,9 @@
     color: #148c8d;
 }
 
+.no-product {
+  margin-left: 12px;
+}
 
 .btn a{
 	font-size: 20px;
@@ -28,6 +31,7 @@
 	margin: 25px auto 50px;
 	max-width: 1080px;
 	padding: 0 25px;
+  min-height: 30vh;
 }
 
 .my-cart-title{

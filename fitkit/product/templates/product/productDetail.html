@@ -31,15 +31,15 @@ Product Detail | Fitkit
     </div>
 
     <div class="product-detail-col">
-        <p>Home / jerseys</p>
-        <h1>{{ product.product_name }}</h1>
-        <h4>&#8377; {{ product.price }}</h4>
+
+        <h1>{{ product.name }}</h1>
+        <h4 style="font-size: 20px">&#8377; {{ product.price }}</h4>
 
         <form class="single-product-detail-form" action="{{ url_for('users.addToCart') }}" , method="post">
           {% if product.is_active == False %}
           <p style="color: red; font-weight: bold;">Out of Stock</p>
           {% else %}
-          <input style="display:none" type="text" name="p" value="{{ product.id }}">
+          <input style="display:none" type="text" name="p" value="{{ product.id }}" max="20">
           <select name="s">
             <option disabled Selected>Select Size</option>
             {% for size in sizes %}

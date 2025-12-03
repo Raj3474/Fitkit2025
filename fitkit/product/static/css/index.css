@@ -52,6 +52,7 @@
 	padding: 8px;
 	min-width: 200px;
 	transition: transform 0.5s;
+  margin: 0px 10px;
 }
 
 .col-4 img{
@@ -74,7 +75,9 @@
 	align-items: center;
 	flex-wrap: wrap;
 	justify-content: center;
-  padding-bottom: 20px
+  padding-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 
 }
 
