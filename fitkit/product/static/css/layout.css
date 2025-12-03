@@ -434,7 +434,10 @@ ul{
 }
 /*----------- media query for less than 600 screen size -------------*/
 @media only screen and (max-width: 600px){
-	.container{
+	.small-container{
+    padding: 10px 0px;
+  }
+  .container{
 		padding: 0 10px;
 	}
 
