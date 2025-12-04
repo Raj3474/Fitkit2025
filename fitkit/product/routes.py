@@ -52,6 +52,8 @@ def products(page=1):
     4. high_to_low - high price first
     '''
 
+    
+
     per_page = 6
     if sort_by == 'newer':
         items = Product.query.filter(Product.is_active==True).order_by(Product.creation_date.desc()).paginate(page=page, per_page=per_page)
