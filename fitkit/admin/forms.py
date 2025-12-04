@@ -17,5 +17,5 @@ class AddProductForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired(), Length(min=10, max=500)])
     price = IntegerField('Price', validators=[DataRequired()])
     sizes = MultipleCheckBoxField('Sizes', choices=[('s', 'Small'), ('m', 'Medium'), ('l', 'Large'), ('xl', 'Extra Large')], validators=[DataRequired()])
-    image = MultipleFileField('Product Image', validators=[FileAllowed(['jpeg', 'jpg', 'png', 'webp']), DataRequired()])
+    image = MultipleFileField('Product Image', validators=[FileAllowed(['jpeg', 'jpg', 'png']), DataRequired()])
     submit = SubmitField('Submit')

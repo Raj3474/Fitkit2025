@@ -4,11 +4,13 @@ from fitkit.utils import send_Email, upload_img
 from functools import wraps
 from flask_login import current_user, logout_user
 from fitkit import db
-
+from fitkit.users.routes import login
 
 from fitkit.users.models import Order
 from fitkit.product.models import Product
 from fitkit.admin.forms import AddProductForm
+
+import secrets
 
 
 
@@ -19,10 +21,6 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         print(request.url)
-        if current_user.is_authenticated and current_user.role == 'user':
-            flash("You do not have permission to access that page.", "danger")
-            return redirect(url_for('product.index'))
-
         if not current_user.is_authenticated or current_user.role != 'admin':
             return redirect(url_for('users.login', next=request.url))
         return f(*args, **kwargs)
@@ -39,7 +37,7 @@ def dashboard():
     return render_template("admin/dashboard.html")
 
 @admin.route("/orders")
-# @admin_required
+# @admin_required  
 def orders():
     latestOrders = Order.query.filter_by(order_status='Booked').all()  # Assuming 'Booked' means new orders
     dispatchedOrders = Order.query.filter_by(order_status='Dispatched').all()
@@ -48,7 +46,7 @@ def orders():
 
 
 @admin.route("/dispatch_order")
-@admin_required
+@admin_required  
 def dispatchOrder():
     p = request.args.get('p')
     order = Order.query.filter_by(id=p).first()
@@ -56,27 +54,27 @@ def dispatchOrder():
     if order.order_status == 'Booked':
         order.order_status = 'Dispatched'  # Update the order status to 'Dispatched'
         db.session.commit()
-        flash("Order dispatched successfully", "success")
+        flash("Order dispatched successfully", "success")  
     else:
         flash("Order is not in a state to be dispatched", "danger")
 
-    # Redirect to the orders page after dispatching the order
+    # Redirect to the orders page after dispatching the order 
     return redirect(url_for('admin.orders'))
 
 
 @admin.route("/complete_order")
-@admin_required
+@admin_required       
 def completeOrder():
     p = request.args.get('p')
     order = Order.query.filter_by(id=p).first()
     if order.order_status == 'Dispatched':
         order.order_status = 'Completed'  # Update the order status to 'Completed'
         db.session.commit()
-        flash("Order closed successfully", "success")
+        flash("Order closed successfully", "success")   
     else:
         flash("Order is not in a state to be completed", "danger")
 
-    # Redirect to the orders page after completing the order
+    # Redirect to the orders page after completing the order    
     return redirect(url_for('admin.orders'))
 
 
@@ -127,9 +125,9 @@ def restockProduct():
             db.session.commit()
             flash("Product Restock successfully", "success")
         else:
-            flash("Product is already active", "info")
+            flash("Product is already active", "info")       
     else:
-        flash("Product not found", "danger")
+        flash("Product not found", "danger")    
     return redirect(url_for('admin.allProducts'))
 
 @admin.route("/remove_product")
@@ -141,18 +139,18 @@ def removeProduct():
         if product.is_active:
             product.is_active = False  # Mark the product as inactive
             db.session.commit()
-            flash("Product removed successfully", "success")
+            flash("Product removed successfully", "success")       
         else:
             flash("Product is already inactive", "warning")
     else:
-        flash("Product not found", "danger")
+        flash("Product not found", "danger")    
     return redirect(url_for('admin.allProducts'))
 
 
 @admin.route("/edit_product/<int:product>", methods=["GET", "POST"])
 @admin_required
 def editProduct(product):
-
+    
     product = Product.query.filter_by(id=product).first()
     if not product:
         flash("Product not found", "danger")
@@ -162,7 +160,7 @@ def editProduct(product):
     print(form.data)
 
     if form.validate_on_submit():
-
+        
         print(form.image.data)
         print('Form submitted successfully')
         print("Form data:", form.data)
@@ -183,8 +181,8 @@ def editProduct(product):
         form.sizes.data = product.sizes.split(',')
         print(form.data)
         print(form.image.data)
-
-
+    
+    
     return render_template("admin/edit_product.html", form=form, product=product)
 
 
