@@ -54,9 +54,7 @@
   object-fit: cover;
 }
 
-.col-4 p{
-	font-size: 22px;
-}
+
 
 .col-4:hover{
 	transform: translateY(-5px);
@@ -177,5 +175,6 @@
      margin-left: 0px;
      margin-right: 0px;
      padding: 2px;
+}
 
 }
