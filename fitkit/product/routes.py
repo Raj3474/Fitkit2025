@@ -54,13 +54,13 @@ def products(page=1):
 
     per_page = 6
     if sort_by == 'newer':
-        items = Product.query.filter().order_by(Product.creation_date.desc()).paginate(page=page, per_page=per_page)
+        items = Product.query.filter(Product.is_active==True).order_by(Product.creation_date.desc()).paginate(page=page, per_page=per_page)
     elif sort_by == 'older':
-        items = Product.query.order_by(Product.creation_date).paginate(page=page, per_page=per_page)
+        items = Product.query.filter(Product.is_active==True).order_by(Product.creation_date).paginate(page=page, per_page=per_page)
     elif sort_by == 'low_to_high':
-        items = Product.query.order_by(Product.price).paginate(page=page, per_page=per_page)
+        items = Product.query.filter(Product.is_active==True).order_by(Product.price).paginate(page=page, per_page=per_page)
     elif sort_by == 'high_to_low':
-        items = Product.query.order_by(Product.price.desc()).paginate(page=page, per_page=per_page)
+        items = Product.query.filter(Product.is_active==True).order_by(Product.price.desc()).paginate(page=page, per_page=per_page)
     else:
         abort(403)
 
