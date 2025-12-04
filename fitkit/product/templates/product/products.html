@@ -1,17 +1,12 @@
 {% extends "product/layout.html" %}
-
-{% block title %}
-    All products Page | Fitkit
-{% endblock %}
+{% block title %}Fitkit Demo Homepage | Ecommerce Website Design{% endblock %}
 
 {% block css %}
-	<link rel="stylesheet" href="{{ url_for('product.static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('product.static', filename='css/index.css') }}">
 {% endblock %}
 
-
 {% block main %}
-
-		<!------------ All Products -------->
+<!------------ All Products -------->
 <div class="small-container">
 
   {% if items.items|length > 0 %}
@@ -31,7 +26,7 @@
     {% for product in items %}
     <div class="col-4">
       <a class="single-image-link" href="{{ url_for('product.detail', product_id=product.id ) }}">
-        <div class="product-image"><img src="{{ url_for('product.static', filename='images/' + product.image + '_thumbnail.jpeg') }}"></div>
+        <img src="{{ url_for('product.static', filename='images/' + product.image + '_thumbnail.jpeg') }}">
         <div class="single-product-details">
           <h4>{{ product.name }}</h4>
           <p>&#8377; {{ product.price }}</p>
@@ -67,15 +62,39 @@
 </div>
 
 
+<script>
 
-	
-		<script>
+  let sort = document.getElementById('sort')
+  console.log(sort)
+  sort.addEventListener('change', () => {
+    document.getElementById('target').submit()
+  })
 
-		let sort = document.getElementById('sort')
-		console.log(sort)
-		sort.addEventListener('change', () => {
-			document.getElementById('target').submit()
-		})
-		
-    	</script>
+</script>
+
+<!-------- testimonial -------->
+<div class="testimonial">
+  <div class="testimonial-container">
+    <div class="row">
+      <div class="col-3">
+        <i class="fa fa-quote-left"></i>
+        <p>“You have to fight to reach your dream. You have to sacrifice and work hard for it.”</p>
+        <img src="{{ url_for('product.static', filename='images/messi.jpeg') }}">
+        <h3>Lionel Messi</h3>
+      </div>
+      <div class="col-3">
+        <i class="fa fa-quote-left"></i>
+        <p>“The more difficult the victory, the greater the happiness in winning.”</p>
+        <img src="{{ url_for('product.static', filename='images/pele.jpeg') }}">
+        <h3>Pelé</h3>
+      </div>
+      <div class="col-3">
+        <i class="fa fa-quote-left"></i>
+        <p>“When people succeed, it is because of hard work. Luck has nothing to do with success.”</p>
+        <img src="{{ url_for('product.static', filename='images/maradona.jpeg') }}">
+        <h3>Diego Maradona</h3>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
