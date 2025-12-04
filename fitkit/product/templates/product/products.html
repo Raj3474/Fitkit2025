@@ -45,7 +45,7 @@
     {% if items.page == page_num %}
     <a class="page-btn page-btn-active" >{{ page_num }}</a>
     {% else %}
-    <a class="page-btn" href="{{ url_for('product.index', page=page_num, sort_by=sort) }}">{{ page_num
+    <a class="page-btn" href="{{ url_for('product.products', page=page_num, sort_by=sort) }}">{{ page_num
       }}</a>
     {% endif %}
     {% else %}
@@ -72,29 +72,4 @@
 
 </script>
 
-<!-------- testimonial -------->
-<div class="testimonial">
-  <div class="testimonial-container">
-    <div class="row">
-      <div class="col-3">
-        <i class="fa fa-quote-left"></i>
-        <p>“You have to fight to reach your dream. You have to sacrifice and work hard for it.”</p>
-        <img src="{{ url_for('product.static', filename='images/messi.jpeg') }}">
-        <h3>Lionel Messi</h3>
-      </div>
-      <div class="col-3">
-        <i class="fa fa-quote-left"></i>
-        <p>“The more difficult the victory, the greater the happiness in winning.”</p>
-        <img src="{{ url_for('product.static', filename='images/pele.jpeg') }}">
-        <h3>Pelé</h3>
-      </div>
-      <div class="col-3">
-        <i class="fa fa-quote-left"></i>
-        <p>“When people succeed, it is because of hard work. Luck has nothing to do with success.”</p>
-        <img src="{{ url_for('product.static', filename='images/maradona.jpeg') }}">
-        <h3>Diego Maradona</h3>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}
