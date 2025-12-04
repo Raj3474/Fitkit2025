@@ -92,7 +92,7 @@ Product Detail | Fitkit
       <div class="related-product">
         <a href="{{ url_for('product.detail', product_id=product.id) }}">
           <img src="{{ url_for('product.static', filename='images/' + product.image + '_thumbnail.jpeg') }}">
-          <h4>{{ product.product_name }}</h4>
+          <h4>{{ product.name }}</h4>
           <p>&#8377; {{ product.price }}</p>
         </a>
       </div>
