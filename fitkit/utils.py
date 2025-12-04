@@ -88,16 +88,12 @@ def upload_img(form_image):
 
 
         # convert png to jpeg
-        if f_ext.lower() == '.png':
-            if file.mode != 'RGBA':
-                f_ext = '.jpg'
+        print(f_ext)
+        if f_ext.lower() == '.png' or f_ext.lower() == '.webp':
+            if file.mode == 'RGBA':
                 file = file.convert('RGB')
 
-
-        # convert jpg to jpeg
-        if f_ext.lower() == '.jpg':
-            f_ext = '.jpeg'
-  
+        f_ext = '.jpeg'
 
         image_name = f"{random_hex}_{str(i)}{f_ext}"
         print(image_name)

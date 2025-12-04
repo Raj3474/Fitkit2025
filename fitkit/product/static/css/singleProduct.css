@@ -185,11 +185,13 @@ input:focus {
 
 .related-product {
   height: 240px;
+  width: 200px;
 }
 
 .related-product-item-row img {
   height: 200px;
   object-fit: cover;
+  width: 180px;
 }
 
 
