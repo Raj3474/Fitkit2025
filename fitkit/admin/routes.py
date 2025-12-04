@@ -91,7 +91,7 @@ def addProduct():
     form = AddProductForm()
 
     if form.validate_on_submit():
-        if not form.image.data:
+        if not form.image.data or form.image.data==[]:
             flash("Please upload at least one product image.", "danger")
             return render_template("admin/add_product.html", form=form)
         print(form.image.data)
@@ -101,7 +101,9 @@ def addProduct():
         p=Product(name=form.name.data, description=form.description.data, price=form.price.data, sizes=','.join(form.sizes.data), image=image_name, num_images=len(form.image.data))
         db.session.add(p)
         db.session.commit()  # Assuming this function handles the image upload
-        return redirect(url_for('admin.allProducts'))
+        form = AddProductForm()
+        flash('Product added successfully', 'success')
+        return redirect(url_for('admin.addProduct'))
 
     return render_template("admin/add_product.html", form=form)
 
